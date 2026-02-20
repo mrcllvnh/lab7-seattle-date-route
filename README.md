@@ -1,4 +1,3 @@
-# lab7-seattle-date-route
 # Lab 7 – Seattle Date Route (Afternoon → Evening)
 
 ## AI Disclosure

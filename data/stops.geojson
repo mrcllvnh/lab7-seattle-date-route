@@ -1,0 +1,35 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "scene": 0, "name": "Gas Works Park", "desc": "Skyline views and a lakeside walk by Lake Union." },
+      "geometry": { "type": "Point", "coordinates": [-122.3344, 47.6456] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "scene": 0, "name": "Fremont Walk", "desc": "Quirky streets, public art, and small shops." },
+      "geometry": { "type": "Point", "coordinates": [-122.3507, 47.6516] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "scene": 0, "name": "Coffee Stop", "desc": "A quick coffee break before heading across town." },
+      "geometry": { "type": "Point", "coordinates": [-122.3470, 47.6540] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "scene": 1, "name": "Dinner in Capitol Hill", "desc": "Dinner time in a lively neighborhood with warm city lighting." },
+      "geometry": { "type": "Point", "coordinates": [-122.3197, 47.6144] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "scene": 1, "name": "Dessert Stop", "desc": "Something sweet after dinner." },
+      "geometry": { "type": "Point", "coordinates": [-122.3200, 47.6160] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "scene": 1, "name": "Night Walk", "desc": "A final stroll through bright streets and nightlife energy." },
+      "geometry": { "type": "Point", "coordinates": [-122.3208, 47.6150] }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 let map, scriptPanel = scrollama();
 
 // 2) IMPORTANT: Add your Mapbox token
-mapboxgl.accessToken = "PASTE_YOUR_MAPBOX_TOKEN_HERE";
+mapboxgl.accessToken = "pk.eyJ1IjoibXJjbGx2bmgiLCJhIjoiY21sOTR6NWYyMGU4NTNmcHdhZG9tZjk5cyJ9.-tdOKe08OGmM8H7mDOxYjA";
 
 // 3) Initialize the Mapbox map
 map = new mapboxgl.Map({

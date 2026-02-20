@@ -1,8 +1,9 @@
 // 1) Map + Scrollama
 let map, scriptPanel = scrollama();
 
-// 2) IMPORTANT: Add your Mapbox token
-mapboxgl.accessToken = "pk.eyJ1IjoibXJjbGx2bmgiLCJhIjoiY21sOTR6NWYyMGU4NTNmcHdhZG9tZjk5cyJ9.-tdOKe08OGmM8H7mDOxYjA";
+// 2) Mapbox token (public token is OK in frontend)
+mapboxgl.accessToken =
+  "pk.eyJ1IjoibXJjbGx2bmgiLCJhIjoiY21sOTR6NWYyMGU4NTNmcHdhZG9tZjk5cyJ9.-tdOKe08OGmM8H7mDOxYjA";
 
 // 3) Initialize the Mapbox map
 map = new mapboxgl.Map({
@@ -16,10 +17,8 @@ map = new mapboxgl.Map({
 // Optional: add navigation controls
 map.addControl(new mapboxgl.NavigationControl());
 
-// 4) (Optional) keep layout responsive
+// 4) Keep layout responsive
 function adjustStoryboardlSize() {
-  // Mapbox automatically handles resizing most of the time,
-  // but this helps on some screens.
   map.resize();
 }
 window.addEventListener("resize", adjustStoryboardlSize);
@@ -30,20 +29,23 @@ async function geojsonFetch() {
   const stops = await response.json();
 
   map.on("load", () => {
-    // Add source + layer
+    // Add source
     map.addSource("stops-src", {
       type: "geojson",
       data: stops
     });
 
+    // Add layer (dots)
     map.addLayer({
       id: "stops-layer",
       type: "circle",
       source: "stops-src",
       paint: {
         "circle-radius": 7,
+        "circle-color": "#e63946",
         "circle-opacity": 0.85,
-        "circle-stroke-width": 1.5
+        "circle-stroke-width": 1.5,
+        "circle-stroke-color": "#ffffff"
       }
     });
 
@@ -74,12 +76,12 @@ async function geojsonFetch() {
       .onStepEnter(handleSceneEnter)
       .onStepExit(handleSceneExit);
 
-    // 6) Scene enter behavior
+    // Scene enter behavior
     function handleSceneEnter(response) {
       const index = response.index;
 
       if (index === 0) {
-        // Scene 0: Afternoon
+        // Scene 0: Afternoon (Fremont/Lake Union)
         map.flyTo({
           center: [-122.344, 47.651],
           zoom: 12.5,
@@ -87,13 +89,15 @@ async function geojsonFetch() {
           speed: 0.6
         });
 
+        // Show only Scene 0 stops
         map.setFilter("stops-layer", ["==", ["get", "scene"], 0]);
 
+        // Hide cover
         document.getElementById("cover").style.visibility = "hidden";
       }
 
       if (index === 1) {
-        // Scene 1: Evening
+        // Scene 1: Evening (Capitol Hill)
         map.flyTo({
           center: [-122.320, 47.614],
           zoom: 13.5,
@@ -101,20 +105,21 @@ async function geojsonFetch() {
           speed: 0.6
         });
 
+        // Show only Scene 1 stops
         map.setFilter("stops-layer", ["==", ["get", "scene"], 1]);
 
+        // Hide cover
         document.getElementById("cover").style.visibility = "hidden";
       }
     }
 
-    // 7) Scene exit behavior (mostly cover visibility)
+    // Scene exit behavior (cover visibility when scrolling up)
     function handleSceneExit(response) {
       const index = response.index;
 
-      if (index === 0) {
-        if (response.direction === "up") {
-          document.getElementById("cover").style.visibility = "visible";
-        }
+      // Leaving the first scene upward = show cover again
+      if (index === 0 && response.direction === "up") {
+        document.getElementById("cover").style.visibility = "visible";
       }
     }
 
